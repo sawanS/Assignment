@@ -63,15 +63,14 @@ public class signUpPage extends TestBase {
 		
 /*		driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-*/		Boolean text = alert.isDisplayed();
+*/		/*Boolean text = alert.isDisplayed();
 		if(Boolean.TRUE)
 		{
 			System.out.println("Login Successful");
 			login = new Loginpage();
 			login.loginDetails(prop.getProperty("Email"), prop.getProperty("password"));
-		}
-		else
-				{
+		}*/
+		
 					driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 					
 					if(mrradiobutton.isDisplayed())
@@ -127,10 +126,7 @@ public class signUpPage extends TestBase {
 					Registerbutton.click();
 					Thread.sleep(5000);
 					
-					
-				}
-				
-		
+			
 		return new HomeDashboardPage();
 				
 	}
