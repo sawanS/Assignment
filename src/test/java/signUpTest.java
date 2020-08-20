@@ -1,5 +1,6 @@
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import qa.Automationpractice.Base.TestBase;
@@ -8,6 +9,8 @@ public class signUpTest extends TestBase {
 
 	
 	signUpPage signup;
+	Loginpage login;
+	HomeDashboardPage home;
 	
 	public signUpTest()
 	{
@@ -15,12 +18,17 @@ public class signUpTest extends TestBase {
 	}
 	
 	@BeforeMethod
-	public void setup()
+	public void setup() throws Exception
 	{	
-		initialization();// calling initilization method from the Login class
+		initialization();
 		signup = new signUpPage();
 		signup.scroll();
+		//login.loginDetails(prop.getProperty("Email"), prop.getProperty("password"));
+
+		
 	}
+	
+	
 	
 	@Test()
 	public void signUpdetailstest() throws Exception

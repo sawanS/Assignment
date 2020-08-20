@@ -12,7 +12,7 @@ import qa.Automationpractice.Base.TestBase;
 public class signUpPage extends TestBase {
 	
 	
-	
+	Loginpage login;
 	
 	@FindBy(xpath="//input[@id='email_create']") WebElement createaccount;
 	@FindBy(xpath="//button[contains(.,'Create an account')]") WebElement button;
@@ -38,7 +38,7 @@ public class signUpPage extends TestBase {
 	@FindBy(xpath="//button[@id='submitAccount']") WebElement Registerbutton ;
 	@FindBy(xpath="//input[@id='postcode']") WebElement zipcode ;
 	
-	@FindBy(xpath="//div[@class='alert alert-danger']") WebElement alert ;
+	@FindBy(xpath="//ol[contains(.,'An account using this email address has already been registered. Please enter a valid password or request a new one.')]") WebElement alert ;
 	
 	@FindBy(xpath="//input[@id='email']") WebElement loginemail;
 	@FindBy(xpath="//input[@id='passwd']") WebElement loginpass;
@@ -54,7 +54,7 @@ public class signUpPage extends TestBase {
 		
 	}
 	
-	public void signUpDetails(String zip, String email, String fname, String lname,String paa, String add, String city1, String mo,String addref) throws Exception
+	public HomeDashboardPage signUpDetails(String zip, String email, String fname, String lname,String paa, String add, String city1, String mo,String addref) throws Exception
 	{
 	
 		
@@ -63,72 +63,76 @@ public class signUpPage extends TestBase {
 		
 /*		driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-*/		
-		/*//Alert alert = driver.switchTo().alert();
-		
-		if(alert.isDisplayed())
+*/		Boolean text = alert.isDisplayed();
+		if(Boolean.TRUE)
 		{
-			System.out.println("Correct");
-			
+			System.out.println("Login Successful");
+			login = new Loginpage();
 			login.loginDetails(prop.getProperty("Email"), prop.getProperty("password"));
-			
-			
-			loginbutton.click();
-			
-			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);			
-			
-		}*/
-		
-		
-				mrradiobutton.click();
-				firstname.sendKeys(fname);
-				lastname.sendKeys(lname);
-				password.sendKeys(paa);
+		}
+		else
+				{
+					driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+					
+					if(mrradiobutton.isDisplayed())
+					{
+						System.out.println("Able to click on radio button");
+						mrradiobutton.click();
+					}
+					
+					firstname.sendKeys(fname);
+					lastname.sendKeys(lname);
+					password.sendKeys(paa);
+					
 				
-			
-				Select select = new Select(days);
-				select.selectByIndex(10);
-				
-				Select select1 = new Select(months);
-				select.selectByIndex(5);
-				
-				Select select3 = new Select(years);
-				select.selectByIndex(1);
-				
-				
-				first.sendKeys(fname);
-				last.sendKeys(lname);
-				address.sendKeys(add);
-				city.sendKeys(city1);
-				
-				Thread.sleep(3000);
-				
-				int size1 = selectState.size();
-						for(int i=0;i<size1;i++)
-						{
-							String text = selectState.get(i).getText();
-							if(text.equals("Alaska"))
+					Select select = new Select(days);
+					select.selectByIndex(10);
+					
+					Select select1 = new Select(months);
+					select.selectByIndex(5);
+					
+					Select select3 = new Select(years);
+					select.selectByIndex(1);
+					
+					
+					first.sendKeys(fname);
+					last.sendKeys(lname);
+					address.sendKeys(add);
+					city.sendKeys(city1);
+					
+					Thread.sleep(3000);
+					
+					int size1 = selectState.size();
+							for(int i=0;i<size1;i++)
 							{
-								selectState.get(i).click();
+								String text1 = selectState.get(i).getText();
+								if(text1.equals("Alaska"))
+								{
+									selectState.get(i).click();
+								}
+								
 							}
-							
-						}
-			
-			
-				Select select5 = new Select(country);
-				select.selectByIndex(0);
 				
 				
-				zipcode.sendKeys(zip);
+					Select select5 = new Select(country);
+					select.selectByIndex(0);
+					
+					
+					zipcode.sendKeys(zip);
+					
+					mobile.sendKeys(mo);
+					addReference.sendKeys(addref);
+					
+					
+					Registerbutton.click();
+					Thread.sleep(5000);
+					
+					
+				}
 				
-				mobile.sendKeys(mo);
-				addReference.sendKeys(addref);
+		
+		return new HomeDashboardPage();
 				
-				
-				Registerbutton.click();
-				Thread.sleep(5000);
-				
-			
 	}
 
 }
