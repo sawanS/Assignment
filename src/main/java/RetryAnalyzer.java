@@ -5,7 +5,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
 	
 	int counter=0;
-	int retrylimit=2;
+	int retrylimit=1;
 	
 	
 	public boolean retry(ITestResult result) {
@@ -13,6 +13,10 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
 		if(counter<retrylimit)
 		{
+			
+			System.out.println("Retrying test " + result.getName() + " with status "
+                    + " for the " + (retrylimit+1) + " time(s).");
+			
 			counter++;
 			return true;
 		}

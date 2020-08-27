@@ -4,6 +4,7 @@
 
 <listeners>
         <listener class-name="Transformer"/>
+        <listener class-name="ExtentReportListeners.ExtentReporterNG"></listener>
   </listeners>
 
   <test name="Test">
