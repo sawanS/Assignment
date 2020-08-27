@@ -2,15 +2,19 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import qa.Automationpractice.Base.TestBase;
 
 public class signUpPage extends TestBase {
 	
+	public WebDriverWait wait;
 	
 	Loginpage login;
 	
@@ -38,7 +42,9 @@ public class signUpPage extends TestBase {
 	@FindBy(xpath="//button[@id='submitAccount']") WebElement Registerbutton ;
 	@FindBy(xpath="//input[@id='postcode']") WebElement zipcode ;
 	
-	@FindBy(xpath="//ol[contains(.,'An account using this email address has already been registered. Please enter a valid password or request a new one.')]") WebElement alert ;
+	@FindBy(xpath="//ol[contains(.,'An account using this email address has already been registered. Please enter a valid password or request a new one.')]") WebElement error ;
+	//@FindBy(xpath="//div//ol//li[contains(text(),'An account using this email address has already been registered. Please enter a valid password or request a new one. ')]") WebElement alert;
+	
 	
 	@FindBy(xpath="//input[@id='email']") WebElement loginemail;
 	@FindBy(xpath="//input[@id='passwd']") WebElement loginpass;
@@ -61,24 +67,38 @@ public class signUpPage extends TestBase {
 		createaccount.sendKeys(email);
 		button.click();
 		
+		
+		
 /*		driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-*/		/*Boolean text = alert.isDisplayed();
-		if(Boolean.TRUE)
+		
+*/
+		Boolean text = error.isDisplayed();
+		/*try {
+			System.out.println("Login Successful");
+			login = new Loginpage();
+			login.loginDetails(prop.getProperty("Email"), prop.getProperty("password"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+		
+		if(text.TRUE)
 		{
 			System.out.println("Login Successful");
 			login = new Loginpage();
 			login.loginDetails(prop.getProperty("Email"), prop.getProperty("password"));
-		}*/
+		}
 		
-					driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 					
-					if(mrradiobutton.isDisplayed())
-					{
-						System.out.println("Able to click on radio button");
-						mrradiobutton.click();
-					}
-					
+			/*WebDriverWait wait = new WebDriverWait(driver,30);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='id_gender1']")));
+			*/
+		else
+		{
+					System.out.println("Able to click on radio button");
+					mrradiobutton.click();
+							
 					firstname.sendKeys(fname);
 					lastname.sendKeys(lname);
 					password.sendKeys(paa);
@@ -126,7 +146,7 @@ public class signUpPage extends TestBase {
 					Registerbutton.click();
 					Thread.sleep(5000);
 					
-			
+		}
 		return new HomeDashboardPage();
 				
 	}

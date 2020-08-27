@@ -25,9 +25,7 @@ public class signUpTest extends TestBase {
 		signup.scroll();
 		//login.loginDetails(prop.getProperty("Email"), prop.getProperty("password"));
 
-		
 	}
-	
 	
 	
 	@Test()
@@ -36,12 +34,8 @@ public class signUpTest extends TestBase {
 		signup.signUpDetails(prop.getProperty("Zipcode"), prop.getProperty("Email"), prop.getProperty("firstname"), prop.getProperty("lastname"), prop.getProperty("password"), 
 				prop.getProperty("address"), prop.getProperty("city"), prop.getProperty("MobilePhone"), prop.getProperty("ReferenceAddress"));
 	
-		
-	
 	}
 	
-	
-
 	
 	@AfterMethod
 	public void closebrowser()
